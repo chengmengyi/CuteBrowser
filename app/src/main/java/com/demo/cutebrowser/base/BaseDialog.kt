@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
 import com.demo.cutebrowser.R
+import com.demo.cutebrowser.util.cuteLog
 import com.gyf.immersionbar.ImmersionBar
 
 abstract class BaseDialog: DialogFragment() {
@@ -18,7 +19,6 @@ abstract class BaseDialog: DialogFragment() {
     override fun onStart() {
         super.onStart()
         mWindow=dialog?.window
-        mWindow?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +31,7 @@ abstract class BaseDialog: DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         return inflater.inflate(layoutRes(),container,false)
     }
 
