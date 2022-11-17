@@ -7,8 +7,8 @@
     <!--    <storage value="LSX/Database" />-->
     <!--数据库中的表,一个类一个表 -->
     <list>
-        <mapping class="com.demo.cutebrowser.bean.BookmarkBean"/>
-        <mapping class="com.demo.cutebrowser.bean.HistoryBean"/>
+        <mapping class="com.cutesearching.privatebrowser.bean.BookmarkBean"/>
+        <mapping class="com.cutesearching.privatebrowser.bean.HistoryBean"/>
 
     </list>
 

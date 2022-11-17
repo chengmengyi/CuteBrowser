@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.demo.cutebrowser">
+    package="com.cutesearching.privatebrowser">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".CuteApp"
+        android:name="com.cutesearching.privatebrowser.CuteApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +14,7 @@
         android:theme="@style/Theme.CuteBrowser"
         android:networkSecurityConfig="@xml/network_security_config">
         <activity
-            android:name=".ac.MainActivity"
+            android:name="com.cutesearching.privatebrowser.ac.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -23,14 +23,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ac.browser.BrowserActivity"
+        <activity android:name="com.cutesearching.privatebrowser.ac.browser.BrowserActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ac.browser.TabListActivity"
+        <activity android:name="com.cutesearching.privatebrowser.ac.browser.TabListActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ac.browser.BookmarkActivity"
+        <activity android:name="com.cutesearching.privatebrowser.ac.browser.BookmarkActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ac.browser.HistoryActivity"
+        <activity android:name="com.cutesearching.privatebrowser.ac.browser.HistoryActivity"
             android:screenOrientation="portrait"/>
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
     </application>
 
 </manifest>

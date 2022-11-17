@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1082341565630",
+    "project_id": "cute-searching-browse",
+    "storage_bucket": "cute-searching-browse.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082341565630:android:9ff17ba82d943442abaaef",
+        "android_client_info": {
+          "package_name": "com.cutesearching.privatebrowser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1082341565630-crc50fusmkn8libamu23qo4eup43dghe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUpMX37QvrG07fB8Y-Z3Nz6-OjnXI_Qis"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1082341565630-crc50fusmkn8libamu23qo4eup43dghe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

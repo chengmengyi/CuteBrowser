@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.demo.cutebrowser.view.slidelayout.SlideLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.cutesearching.privatebrowser.view.slidelayout.SlideLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/slide_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -61,4 +61,4 @@
         android:textSize="14dp"
         android:background="#FF3A30"
         android:textColor="@color/white" />
-</com.demo.cutebrowser.view.slidelayout.SlideLayout>
+</com.cutesearching.privatebrowser.view.slidelayout.SlideLayout>
