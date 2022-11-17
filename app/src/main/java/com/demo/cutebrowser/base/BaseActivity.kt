@@ -7,6 +7,7 @@ import com.demo.cutebrowser.R
 import com.gyf.immersionbar.ImmersionBar
 
 abstract class BaseActivity:AppCompatActivity() {
+    var onResume=false
     protected lateinit var immersionBar: ImmersionBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,5 +33,20 @@ abstract class BaseActivity:AppCompatActivity() {
         metrics.density = td
         metrics.scaledDensity = td
         metrics.densityDpi = dpi
+    }
+
+    override fun onResume() {
+        super.onResume()
+        onResume=true
+    }
+
+    override fun onPause() {
+        super.onPause()
+        onResume=false
+    }
+
+    override fun onStop() {
+        super.onStop()
+        onResume=false
     }
 }

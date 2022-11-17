@@ -8,28 +8,48 @@ import androidx.core.animation.doOnEnd
 import com.blankj.utilcode.util.ActivityUtils
 import com.demo.cutebrowser.R
 import com.demo.cutebrowser.ac.browser.BrowserActivity
+import com.demo.cutebrowser.admob.LoadAd
 import com.demo.cutebrowser.base.BaseActivity
+import com.demo.cutebrowser.conf.CuteConf
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(){
     private lateinit var progressAnimator:ValueAnimator
+    private val show by lazy { ShowFullAd(CuteConf.OPEN,this){ toBrowserAc() } }
 
     override fun layoutRes(): Int = R.layout.activity_main
 
     override fun initView() {
+        preLoadAd()
         start()
+    }
+
+    private fun preLoadAd(){
+        LoadAd.loadAd(CuteConf.OPEN)
+        LoadAd.loadAd(CuteConf.BOOK_MARK)
+        LoadAd.loadAd(CuteConf.HISTORY)
+        LoadAd.loadAd(CuteConf.TAB)
     }
 
     private fun start(){
         progressAnimator=ValueAnimator.ofInt(0, 100).apply {
-            duration = 3000L
+            duration = 10000L
             interpolator = LinearInterpolator()
             addUpdateListener {
                 val progress = it.animatedValue as Int
                 view_progress.progress = progress
-            }
-            doOnEnd {
-                toBrowserAc()
+                val time = (10 * (progress / 100.0F)).toInt()
+                if (time in 3..9){
+                    show.showFullAd { refresh ->
+                        stop()
+                        view_progress.progress=100
+                        if (refresh){
+                            toBrowserAc()
+                        }
+                    }
+                }else if (time>=10){
+                    toBrowserAc()
+                }
             }
             start()
         }

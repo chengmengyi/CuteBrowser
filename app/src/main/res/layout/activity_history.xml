@@ -57,13 +57,20 @@
         app:layout_constraintLeft_toLeftOf="@id/view_search"
         app:layout_constraintBottom_toBottomOf="@id/view_search"
         app:layout_constraintRight_toRightOf="@id/view_search"/>
+    <include
+        android:id="@+id/native_ad"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginTop="10dp"
+        layout="@layout/layout_history_native_ad"
+        app:layout_constraintTop_toBottomOf="@id/view_search"/>
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view_search">
+        app:layout_constraintTop_toBottomOf="@id/native_ad">
         <com.scwang.smart.refresh.header.ClassicsHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

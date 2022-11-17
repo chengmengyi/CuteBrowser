@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.demo.cutebrowser.R
 import com.demo.cutebrowser.adapter.BottomAdapter
 import com.demo.cutebrowser.base.BaseActivity
-import com.demo.cutebrowser.bean.BookmarkBean
 import com.demo.cutebrowser.dialog.MoreFuncDialog
 import com.demo.cutebrowser.dialog.SearchDialog
 import com.demo.cutebrowser.eventbus.EventBean
@@ -15,8 +14,9 @@ import com.demo.cutebrowser.eventbus.EventCode
 import com.demo.cutebrowser.interfaces.IBrowserCallback
 import com.demo.cutebrowser.manager.BrowserManager
 import com.demo.cutebrowser.manager.SearchEngineManager
+import com.demo.cutebrowser.util.ActivityCallback
+import com.demo.cutebrowser.util.cuteLog
 import com.demo.cutebrowser.util.funcEnable
-import com.demo.cutebrowser.util.showToast
 import kotlinx.android.synthetic.main.activity_browser.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -25,6 +25,18 @@ import kotlinx.coroutines.withContext
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import java.lang.System.exit
+
+import com.gyf.immersionbar.ImmersionBar
+import android.view.ViewGroup
+
+import android.app.Activity
+import android.view.View.NO_ID
+
+import androidx.annotation.NonNull
+
+
+
+
 
 class BrowserActivity:BaseActivity(), IBrowserCallback {
     private var clickTab=false
@@ -127,10 +139,10 @@ class BrowserActivity:BaseActivity(), IBrowserCallback {
 
     private fun showMoreFuncDialog(){
         if(BrowserManager.getCurrentShowHome()==false){
-            val moreFuncDialog = MoreFuncDialog(this) {
+            val moreFuncDialog = MoreFuncDialog {
                 clickMoreFuncItem(it)
             }
-            moreFuncDialog.show(rv_bottom)
+            moreFuncDialog.show(supportFragmentManager,"MoreFuncDialog")
         }else{
             funcEnable()
         }
@@ -186,6 +198,7 @@ class BrowserActivity:BaseActivity(), IBrowserCallback {
 
     override fun onDestroy() {
         super.onDestroy()
+        ActivityCallback.refreshNativeAd=true
         EventBus.getDefault().unregister(this)
         exit(0)
     }

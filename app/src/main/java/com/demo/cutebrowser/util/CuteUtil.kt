@@ -1,6 +1,9 @@
 package com.demo.cutebrowser.util
 
 import android.util.Log
+import com.demo.cutebrowser.bean.CuteAdBean
+import com.demo.cutebrowser.conf.CuteFirebase
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -14,4 +17,24 @@ fun formatTime(time:Long):String{
     }catch (e:Exception){
         "time error"
     }
+}
+
+
+fun getAdList(t:String):List<CuteAdBean>{
+    val list= arrayListOf<CuteAdBean>()
+    try {
+        val jsonArray = JSONObject(CuteFirebase.getStorageAd()).getJSONArray(t)
+        for (index in 0 until jsonArray.length()){
+            val jsonObject = jsonArray.getJSONObject(index)
+            list.add(
+                CuteAdBean(
+                    jsonObject.optString("cute_id"),
+                    jsonObject.optString("cute_type"),
+                    jsonObject.optInt("cute_sort"),
+                    jsonObject.optString("cute_source"),
+                )
+            )
+        }
+    }catch (e:Exception){}
+    return list.filter { it.source_cute == "admob" }.sortedByDescending { it.sort_cute }
 }

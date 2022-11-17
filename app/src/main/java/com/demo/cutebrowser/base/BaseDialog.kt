@@ -36,9 +36,16 @@ abstract class BaseDialog: DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        immersionBar= ImmersionBar.with(this).apply {
-            statusBarColor(R.color.color_1f1f1f)
-            fitsSystemWindows(true)
+//        immersionBar= ImmersionBar.with(this).apply {
+//            statusBarColor(R.color.color_1f1f1f)
+//            fitsSystemWindows(true)
+//            statusBarDarkFont(false)
+//            init()
+//        }
+
+        immersionBar=ImmersionBar.with(this).apply {
+            statusBarAlpha(0f)
+            autoDarkModeEnable(true)
             statusBarDarkFont(false)
             init()
         }

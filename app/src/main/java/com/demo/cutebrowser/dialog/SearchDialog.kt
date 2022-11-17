@@ -18,6 +18,7 @@ class SearchDialog:BaseDialog() {
     override fun layoutRes(): Int = R.layout.dialog_search
 
     override fun initView() {
+        immersionBar?.statusBarView(top_view)?.init()
         iv_cancel.setOnClickListener { edit_search.setText("") }
         iv_search.setOnClickListener {
             search()

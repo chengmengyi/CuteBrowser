@@ -1,43 +1,34 @@
 package com.demo.cutebrowser.dialog
 
-import android.content.Context
 import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.PopupWindow
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.blankj.utilcode.util.SizeUtils
 import com.demo.cutebrowser.R
 import com.demo.cutebrowser.adapter.MoreFuncAdapter
+import com.demo.cutebrowser.base.BaseDialog
+import kotlinx.android.synthetic.main.dialog_more_func.*
 
-class MoreFuncDialog (
-    private val context: Context,
-    private val clickItem:(content:String)->Unit
-){
-    private var mPopupWindow: PopupWindow?=null
-    private var moreFuncAdapter:MoreFuncAdapter?=null
+class MoreFuncDialog (private val clickItem:(content:String)->Unit):BaseDialog(){
 
-    init {
-        val view = LayoutInflater.from(context).inflate(R.layout.dialog_more_func, null)
-        mPopupWindow= PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        mPopupWindow?.isFocusable=true
-        mPopupWindow?.isOutsideTouchable=true
 
-        val rvMoreFunc = view.findViewById<RecyclerView>(R.id.rv_more_func)
-        moreFuncAdapter= MoreFuncAdapter(context){
-            clickItem.invoke(it)
-            mPopupWindow?.dismiss()
-        }
-        rvMoreFunc.apply {
-            layoutManager= LinearLayoutManager(context)
-            adapter=moreFuncAdapter
-        }
+    private val funcAdapter by lazy {  MoreFuncAdapter(requireContext()){
+        clickItem.invoke(it)
+        dismiss()
+    }}
+
+    override fun onStart() {
+        super.onStart()
+        mWindow?.setGravity(Gravity.BOTTOM)
+        mWindow?.setWindowAnimations(R.style.BottomAnimation)
     }
 
-    fun show(view: View){
-        mPopupWindow?.showAtLocation(view, Gravity.BOTTOM,0, SizeUtils.dp2px(66F))
-    }
+    override fun layoutRes(): Int = R.layout.dialog_more_func
 
+    override fun initView() {
+        other_view.setOnClickListener { dismiss() }
+
+        rv_more_func.apply {
+            layoutManager=LinearLayoutManager(requireContext())
+            adapter=funcAdapter
+        }
+    }
 }

@@ -7,11 +7,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.demo.cutebrowser.R
+import com.demo.cutebrowser.ac.ShowNativeAd
 import com.demo.cutebrowser.adapter.HistoryAdapter
 import com.demo.cutebrowser.base.BaseActivity
 import com.demo.cutebrowser.bean.HistoryBean
+import com.demo.cutebrowser.conf.CuteConf
 import com.demo.cutebrowser.eventbus.EventBean
 import com.demo.cutebrowser.eventbus.EventCode
+import com.demo.cutebrowser.util.ActivityCallback
 import com.demo.cutebrowser.util.StorageUtil
 import com.demo.cutebrowser.util.formatTime
 import com.demo.cutebrowser.view.sticky.StickyItemDecoration
@@ -27,6 +30,7 @@ class HistoryActivity:BaseActivity(), OnRefreshLoadMoreListener{
     private var offset=0
     private var searchContent=""
     private val historyList= arrayListOf<HistoryBean>()
+    private val show by lazy { ShowNativeAd(CuteConf.HISTORY,this) }
 
     private val historyAdapter by lazy { HistoryAdapter(this,historyList){
         EventBean(EventCode.SHOW_RECORD_URL, str = it.web).send()
@@ -112,5 +116,15 @@ class HistoryActivity:BaseActivity(), OnRefreshLoadMoreListener{
             val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(edit_search.getWindowToken(), 0);
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        show.showAd()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        show.stopShow()
     }
 }
