@@ -15,20 +15,8 @@ object CuteConf {
         {
             "cute_source": "admob",
             "cute_id": "ca-app-pub-3940256099942544/3419835294",
-            "cute_type": "cha",
+            "cute_type": "kai",
             "cute_sort": 1
-        },
-        {
-            "cute_source": "admob",
-            "cute_id": "ca-app-pub-3940256099942544/3419835294A",
-            "cute_type": "kai",
-            "cute_sort": 2
-        },
-        {
-            "cute_source": "admob",
-            "cute_id": "ca-app-pub-3940256099942544/3419835294AA",
-            "cute_type": "kai",
-            "cute_sort": 3
         }
     ],
     "cute_bookmark": [

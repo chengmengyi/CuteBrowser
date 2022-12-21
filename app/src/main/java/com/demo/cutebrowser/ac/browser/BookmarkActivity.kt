@@ -7,8 +7,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.demo.cutebrowser.R
-import com.demo.cutebrowser.ac.ShowFullAd
-import com.demo.cutebrowser.ac.ShowNativeAd
+import com.demo.cutebrowser.admob.ShowFullAd
 import com.demo.cutebrowser.adapter.BookmarkAdapter
 import com.demo.cutebrowser.admob.LoadAd
 import com.demo.cutebrowser.base.BaseActivity
@@ -17,7 +16,6 @@ import com.demo.cutebrowser.conf.CuteConf
 import com.demo.cutebrowser.eventbus.EventBean
 import com.demo.cutebrowser.eventbus.EventCode
 import com.demo.cutebrowser.util.StorageUtil
-import com.demo.cutebrowser.util.cuteLog
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import kotlinx.android.synthetic.main.activity_bookmark.*

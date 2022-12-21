@@ -2,7 +2,7 @@ package com.demo.cutebrowser.ac.browser
 
 import androidx.recyclerview.widget.GridLayoutManager
 import com.demo.cutebrowser.R
-import com.demo.cutebrowser.ac.ShowFullAd
+import com.demo.cutebrowser.admob.ShowFullAd
 import com.demo.cutebrowser.adapter.TabListAdapter
 import com.demo.cutebrowser.admob.CuteAdNum
 import com.demo.cutebrowser.admob.LoadAd

@@ -4,11 +4,11 @@ import android.animation.ValueAnimator
 import android.content.Intent
 import android.view.KeyEvent
 import android.view.animation.LinearInterpolator
-import androidx.core.animation.doOnEnd
 import com.blankj.utilcode.util.ActivityUtils
 import com.demo.cutebrowser.R
 import com.demo.cutebrowser.ac.browser.BrowserActivity
 import com.demo.cutebrowser.admob.LoadAd
+import com.demo.cutebrowser.admob.ShowFullAd
 import com.demo.cutebrowser.base.BaseActivity
 import com.demo.cutebrowser.conf.CuteConf
 import kotlinx.android.synthetic.main.activity_main.*

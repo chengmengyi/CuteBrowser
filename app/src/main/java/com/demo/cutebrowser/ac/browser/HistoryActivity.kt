@@ -7,14 +7,13 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.demo.cutebrowser.R
-import com.demo.cutebrowser.ac.ShowNativeAd
+import com.demo.cutebrowser.admob.ShowNativeAd
 import com.demo.cutebrowser.adapter.HistoryAdapter
 import com.demo.cutebrowser.base.BaseActivity
 import com.demo.cutebrowser.bean.HistoryBean
 import com.demo.cutebrowser.conf.CuteConf
 import com.demo.cutebrowser.eventbus.EventBean
 import com.demo.cutebrowser.eventbus.EventCode
-import com.demo.cutebrowser.util.ActivityCallback
 import com.demo.cutebrowser.util.StorageUtil
 import com.demo.cutebrowser.util.formatTime
 import com.demo.cutebrowser.view.sticky.StickyItemDecoration

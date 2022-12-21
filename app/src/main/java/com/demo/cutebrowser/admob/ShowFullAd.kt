@@ -1,4 +1,4 @@
-package com.demo.cutebrowser.ac
+package com.demo.cutebrowser.admob
 
 import com.demo.cutebrowser.admob.CuteAdNum
 import com.demo.cutebrowser.admob.LoadAd

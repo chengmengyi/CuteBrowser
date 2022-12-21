@@ -34,10 +34,6 @@ import android.view.View.NO_ID
 
 import androidx.annotation.NonNull
 
-
-
-
-
 class BrowserActivity:BaseActivity(), IBrowserCallback {
     private var clickTab=false
     private val bottomAdapter by lazy { BottomAdapter(this@BrowserActivity){ clickBottom(it) } }

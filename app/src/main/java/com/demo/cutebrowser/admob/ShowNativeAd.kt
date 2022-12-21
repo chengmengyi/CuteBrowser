@@ -1,4 +1,4 @@
-package com.demo.cutebrowser.ac
+package com.demo.cutebrowser.admob
 
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageView
