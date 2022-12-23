@@ -26,13 +26,6 @@ object CuteFirebase {
         CuteAdNum.getCurrent()
         createVpn(CuteConf.localVpnList)
 
-
-
-        csb_reffer=MMKV.defaultMMKV().decodeString("csb_reffer")?:"2"
-        csb_shpop=MMKV.defaultMMKV().decodeString("csb_shpop")?:"2"
-        csb_test=MMKV.defaultMMKV().decodeString("csb_test")?:""
-
-
 //        val remoteConfig = Firebase.remoteConfig
 //        remoteConfig.fetchAndActivate().addOnCompleteListener {
 //            if (it.isSuccessful){

@@ -60,15 +60,6 @@ class BrowserActivity:BaseActivity(), IBrowserCallback {
             }
             doPlanB(false)
         }
-
-
-        save.setOnClickListener {
-            MMKV.defaultMMKV().encode("referrer",et_referrer.text.toString())
-            MMKV.defaultMMKV().encode("csb_reffer",et_csb_reffer.text.toString())
-            MMKV.defaultMMKV().encode("csb_shpop",et_csb_shpop.text.toString())
-            MMKV.defaultMMKV().encode("csb_test",et_csb_test.text.toString())
-        }
-
     }
 
     override fun changeShowView(view: View) {
