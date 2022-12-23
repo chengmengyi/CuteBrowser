@@ -15,7 +15,9 @@ import kotlinx.coroutines.launch
 
 object ActivityCallback {
     var acIsFront=true
-    var refreshNativeAd=true
+    var checkPlan=true
+    //0冷启动 1热启动 2已启动
+    var loadAppType=0
     private var acIsBack=false
     private var job: Job?=null
 
@@ -30,6 +32,12 @@ object ActivityCallback {
                 if (acNum==1){
                     acIsFront=true
                     if (acIsBack){
+                        loadAppType=1
+                        try {
+                            checkPlan=ActivityUtils.getTopActivity().javaClass.name==BrowserActivity::class.java.name
+                        }catch (e:Exception){
+
+                        }
                         if (ActivityUtils.isActivityExistsInStack(BrowserActivity::class.java)){
                             activity.startActivity(Intent(activity, MainActivity::class.java))
                         }
@@ -46,7 +54,6 @@ object ActivityCallback {
                 acNum--
                 if (acNum<=0){
                     acIsFront=false
-                    refreshNativeAd=true
                     job= GlobalScope.launch {
                         delay(3000L)
                         acIsBack=true

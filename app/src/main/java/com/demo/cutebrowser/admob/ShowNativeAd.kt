@@ -1,14 +1,20 @@
 package com.demo.cutebrowser.admob
 
+import android.graphics.Outline
+import android.view.View
+import android.view.ViewOutlineProvider
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.utils.widget.ImageFilterView
+import com.blankj.utilcode.util.SizeUtils
 import com.demo.cutebrowser.R
 import com.demo.cutebrowser.admob.CuteAdNum
 import com.demo.cutebrowser.admob.LoadAd
 import com.demo.cutebrowser.base.BaseActivity
+import com.demo.cutebrowser.conf.CuteConf
 import com.demo.cutebrowser.util.ActivityCallback
+import com.demo.cutebrowser.util.ReloadAdManager
 import com.demo.cutebrowser.util.cuteLog
 import com.demo.cutebrowser.util.show
 import com.google.android.gms.ads.nativead.NativeAd
@@ -55,16 +61,28 @@ class ShowNativeAd(
         adView.callToActionView=baseActivity.findViewById(R.id.ad_btn)
         (adView.callToActionView as AppCompatTextView).text=ad.callToAction
 
-//        if(type!=AdType.APP_LOCK_HOME_AD){
-//            adView.mediaView=baseActivity.findViewById(R.id.native_cover)
-//            adRes.mediaContent?.let {
-//                adView.mediaView?.apply {
-//                    setMediaContent(it)
-//                    setImageScaleType(ImageView.ScaleType.CENTER_CROP)
-//                    outlineProvider = appLockProvider
-//                }
-//            }
-//        }
+        if(loadAdCover()){
+            adView.mediaView=baseActivity.findViewById(R.id.ad_media)
+            ad.mediaContent?.let {
+                adView.mediaView?.apply {
+                    setMediaContent(it)
+                    setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                    outlineProvider = object : ViewOutlineProvider() {
+                        override fun getOutline(view: View?, outline: Outline?) {
+                            if (view == null || outline == null) return
+                            outline.setRoundRect(
+                                0,
+                                0,
+                                view.width,
+                                view.height,
+                                SizeUtils.dp2px(6F).toFloat()
+                            )
+                            view.clipToOutline = true
+                        }
+                    }
+                }
+            }
+        }
 
         adView.bodyView=baseActivity.findViewById(R.id.ad_desc)
         (adView.bodyView as AppCompatTextView).text=ad.body
@@ -73,12 +91,15 @@ class ShowNativeAd(
         (adView.headlineView as AppCompatTextView).text=ad.headline
 
         adView.setNativeAd(ad)
+        adView.show(true)
         baseActivity.findViewById<AppCompatImageView>(R.id.ad_cover).show(false)
         CuteAdNum.saveShow()
         LoadAd.deleteAdBean(t)
         LoadAd.loadAd(t)
-        ActivityCallback.refreshNativeAd=false
+        ReloadAdManager.setBool(t,false)
     }
+
+    private fun loadAdCover()=t==CuteConf.VPN_HOME||t==CuteConf.VPN_RESULT||t==CuteConf.HOME
     
     fun stopShow(){
         showJob?.cancel()

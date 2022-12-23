@@ -18,4 +18,50 @@
         android:layout_height="wrap_content"
         android:background="#80FB94"
         app:layout_constraintBottom_toBottomOf="parent"/>
+    <include
+        android:id="@+id/layout_home_bottom"
+        layout="@layout/layout_home_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/rv_bottom"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/rv_bottom">
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_referrer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="输入referrer"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_csb_reffer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="输入csb_reffer"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_csb_shpop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="输入csb_shpop"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_csb_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="输入csb_test"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"/>
+        <Button
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="保存"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>

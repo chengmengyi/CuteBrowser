@@ -59,3 +59,29 @@
 #glide如果你的API级别<=Android API 27 则需要添加 4.6.1
 -dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder
 -dontwarn me.iwf.photopicker.adapter.**
+
+
+
+ #okhttp
+  -dontwarn okhttp3.**
+  -keep class okhttp3.**{*;}
+
+  #okio
+  -dontwarn okio.**
+  -keep class okio.**{*;}
+
+  #okgo
+  -dontwarn com.lzy.okgo.**
+  -keep class com.lzy.okgo.**{*;}
+
+  #okrx
+  -dontwarn com.lzy.okrx.**
+  -keep class com.lzy.okrx.**{*;}
+
+  #okrx2
+  -dontwarn com.lzy.okrx2.**
+  -keep class com.lzy.okrx2.**{*;}
+
+  #okserver
+  -dontwarn com.lzy.okserver.**
+  -keep class com.lzy.okserver.**{*;}

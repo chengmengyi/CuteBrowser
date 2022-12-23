@@ -4,6 +4,8 @@ import android.animation.ValueAnimator
 import android.content.Intent
 import android.view.KeyEvent
 import android.view.animation.LinearInterpolator
+import com.android.installreferrer.api.InstallReferrerClient
+import com.android.installreferrer.api.InstallReferrerStateListener
 import com.blankj.utilcode.util.ActivityUtils
 import com.demo.cutebrowser.R
 import com.demo.cutebrowser.ac.browser.BrowserActivity
@@ -11,6 +13,8 @@ import com.demo.cutebrowser.admob.LoadAd
 import com.demo.cutebrowser.admob.ShowFullAd
 import com.demo.cutebrowser.base.BaseActivity
 import com.demo.cutebrowser.conf.CuteConf
+import com.demo.cutebrowser.util.ReloadAdManager
+import com.tencent.mmkv.MMKV
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(){
@@ -20,6 +24,8 @@ class MainActivity : BaseActivity(){
     override fun layoutRes(): Int = R.layout.activity_main
 
     override fun initView() {
+        readReferrer()
+        ReloadAdManager.reset()
         preLoadAd()
         start()
     }
@@ -29,6 +35,10 @@ class MainActivity : BaseActivity(){
         LoadAd.loadAd(CuteConf.BOOK_MARK)
         LoadAd.loadAd(CuteConf.HISTORY)
         LoadAd.loadAd(CuteConf.TAB)
+        LoadAd.loadAd(CuteConf.VPN_HOME)
+        LoadAd.loadAd(CuteConf.HOME)
+        LoadAd.loadAd(CuteConf.VPN_CONNECT)
+        LoadAd.loadAd(CuteConf.VPN_RESULT)
     }
 
     private fun start(){
@@ -56,10 +66,11 @@ class MainActivity : BaseActivity(){
     }
 
     private fun toBrowserAc(){
-        val activityExistsInStack = ActivityUtils.isActivityExistsInStack(BrowserActivity::class.java)
-        if (!activityExistsInStack){
-            startActivity(Intent(this,BrowserActivity::class.java))
-        }
+//        val activityExistsInStack = ActivityUtils.isActivityExistsInStack(BrowserActivity::class.java)
+//        if (!activityExistsInStack){
+//            startActivity(Intent(this,BrowserActivity::class.java))
+//        }
+        startActivity(Intent(this,BrowserActivity::class.java))
         finish()
     }
 
@@ -82,6 +93,33 @@ class MainActivity : BaseActivity(){
     override fun onPause() {
         super.onPause()
         progressAnimator.pause()
+    }
+
+    private fun readReferrer(){
+        val decodeString = MMKV.defaultMMKV().decodeString("referrer", "")?:""
+        if(decodeString.isEmpty()){
+            val referrerClient = InstallReferrerClient.newBuilder(application).build()
+            referrerClient.startConnection(object : InstallReferrerStateListener {
+                override fun onInstallReferrerSetupFinished(responseCode: Int) {
+                    try {
+                        referrerClient.endConnection()
+                        when (responseCode) {
+                            InstallReferrerClient.InstallReferrerResponse.OK -> {
+                                val installReferrer = referrerClient.installReferrer.installReferrer
+                                MMKV.defaultMMKV().encode("referrer",installReferrer)
+                            }
+                            else->{
+
+                            }
+                        }
+                    } catch (e: Exception) {
+
+                    }
+                }
+                override fun onInstallReferrerServiceDisconnected() {
+                }
+            })
+        }
     }
 
     override fun onDestroy() {

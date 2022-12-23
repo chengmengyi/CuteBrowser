@@ -72,7 +72,7 @@ class ShowFullAd(
         }
 
         private fun showFinish(){
-            if (t!=CuteConf.OPEN){
+            if (t!=CuteConf.OPEN||t!=CuteConf.VPN_BACK){
                 LoadAd.loadAd(t)
             }
             GlobalScope.launch(Dispatchers.Main) {

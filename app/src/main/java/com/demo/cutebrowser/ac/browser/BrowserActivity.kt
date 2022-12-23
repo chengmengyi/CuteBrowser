@@ -14,14 +14,7 @@ import com.demo.cutebrowser.eventbus.EventCode
 import com.demo.cutebrowser.interfaces.IBrowserCallback
 import com.demo.cutebrowser.manager.BrowserManager
 import com.demo.cutebrowser.manager.SearchEngineManager
-import com.demo.cutebrowser.util.ActivityCallback
-import com.demo.cutebrowser.util.cuteLog
-import com.demo.cutebrowser.util.funcEnable
 import kotlinx.android.synthetic.main.activity_browser.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import java.lang.System.exit
@@ -33,10 +26,25 @@ import android.app.Activity
 import android.view.View.NO_ID
 
 import androidx.annotation.NonNull
+import com.demo.cutebrowser.ac.vpn.VpnHomeActivity
+import com.demo.cutebrowser.admob.ShowNativeAd
+import com.demo.cutebrowser.conf.CuteConf
+import com.demo.cutebrowser.conf.CuteFirebase
+import com.demo.cutebrowser.dialog.IRDialog
+import com.demo.cutebrowser.dialog.VpnDialog
+import com.demo.cutebrowser.util.*
+import com.demo.cutebrowser.view.BrowserHomeView
+import com.demo.cutebrowser.vpn.ConnectVpnManager
+import com.tencent.mmkv.MMKV
+import kotlinx.android.synthetic.main.layout_home_bottom.*
+import kotlinx.coroutines.*
+import java.util.*
 
 class BrowserActivity:BaseActivity(), IBrowserCallback {
     private var clickTab=false
+    private var showingVpnDialog=false
     private val bottomAdapter by lazy { BottomAdapter(this@BrowserActivity){ clickBottom(it) } }
+    private val showAd by lazy { ShowNativeAd(CuteConf.HOME,this) }
 
     override fun layoutRes(): Int = R.layout.activity_browser
 
@@ -45,9 +53,26 @@ class BrowserActivity:BaseActivity(), IBrowserCallback {
         BrowserManager.showHomeView(this)
         setAdapter()
         EventBus.getDefault().register(this)
+        iv_vpn.setOnClickListener {
+            if(CuteFirebase.isIR){
+                IRDialog().show(supportFragmentManager,"IRDialog")
+                return@setOnClickListener
+            }
+            doPlanB(false)
+        }
+
+
+        save.setOnClickListener {
+            MMKV.defaultMMKV().encode("referrer",et_referrer.text.toString())
+            MMKV.defaultMMKV().encode("csb_reffer",et_csb_reffer.text.toString())
+            MMKV.defaultMMKV().encode("csb_shpop",et_csb_shpop.text.toString())
+            MMKV.defaultMMKV().encode("csb_test",et_csb_test.text.toString())
+        }
+
     }
 
     override fun changeShowView(view: View) {
+        layout_home_bottom.show(view is BrowserHomeView)
         frameLayout.removeAllViews()
         frameLayout.removeAllViewsInLayout()
         frameLayout.addView(view)
@@ -191,10 +216,118 @@ class BrowserActivity:BaseActivity(), IBrowserCallback {
         return false
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (ReloadAdManager.reload(CuteConf.HOME)){
+            showAd.showAd()
+        }
+        updateVpnInfo()
+        checkPlan()
+    }
+
+    private fun updateVpnInfo(){
+        if(ConnectVpnManager.connected()){
+            val server = ConnectVpnManager.server
+            tv_vpn_name.text=server.csb_ccount
+            iv_vpn_logo.setImageResource(getVpnLogo(server.csb_ccount))
+        }
+    }
+
+    private fun checkPlan(){
+        GlobalScope.launch(Dispatchers.Main) {
+            delay(300L)
+            if(!onResume){
+                return@launch
+            }
+            withContext(Dispatchers.Main){
+                if (ActivityCallback.loadAppType==2){
+                    return@withContext
+                }
+                if(!isBuyUser(getReferrerStr())){
+                    doPlanA()
+                    PointManager.setUser("a")
+                    return@withContext
+                }
+                if(CuteFirebase.csb_test.isEmpty()){
+                    val csb_test = MMKV.defaultMMKV().decodeString("csb_test") ?: ""
+                    if (csb_test.isEmpty()){
+                        val nextInt = Random().nextInt(100)
+                        CuteFirebase.csb_test=if (nextInt>20) "B" else "A"
+                        MMKV.defaultMMKV().encode("csb_test",csb_test)
+                    }else{
+                        CuteFirebase.csb_test=csb_test
+                    }
+                }
+                PointManager.setUser(CuteFirebase.csb_test.toLowerCase())
+                if(CuteFirebase.csb_test=="B"&&ConnectVpnManager.disconnected()){
+                    doPlanB(true)
+                }else{
+                    doPlanA()
+                }
+            }
+        }
+    }
+
+    private fun doPlanA(){
+        if (CuteFirebase.csb_shpop=="2"){
+            if (ActivityCallback.loadAppType==0){
+                checkReffer()
+            }
+            ActivityCallback.loadAppType=2
+        }else if (CuteFirebase.csb_shpop=="1"){
+            if (ActivityCallback.loadAppType!=2){
+                checkReffer()
+            }
+            ActivityCallback.loadAppType=2
+        }
+    }
+
+    private fun checkReffer(){
+        when(CuteFirebase.csb_reffer){
+            "1"->showVpnDialog()
+            "2"->{
+                if (isBuyUser(getReferrerStr())){
+                    showVpnDialog()
+                }
+            }
+            "3"->{
+                val referrerStr = getReferrerStr()
+                if(referrerStr.contains("facebook")||referrerStr.contains("fb4a")){
+                    showVpnDialog()
+                }
+            }
+        }
+    }
+
+    private fun showVpnDialog(){
+        if(ConnectVpnManager.disconnected()&&!showingVpnDialog){
+            showingVpnDialog=true
+            VpnDialog{
+                showingVpnDialog=false
+                if (it){
+                    doPlanB(true)
+                }
+            }.show(supportFragmentManager,"VpnDialog")
+        }
+    }
+
+    private fun doPlanB(autoConnect:Boolean){
+        ActivityCallback.loadAppType=2
+        if(CuteFirebase.isIR){
+            IRDialog().show(supportFragmentManager,"IRDialog")
+            return
+        }
+        startActivity(Intent(this,VpnHomeActivity::class.java).apply {
+            putExtra("autoConnect",autoConnect)
+        })
+    }
+
+    private fun getReferrerStr() = MMKV.defaultMMKV().decodeString("referrer", "")?:""
 
     override fun onDestroy() {
         super.onDestroy()
-        ActivityCallback.refreshNativeAd=true
+        showAd.stopShow()
+        ReloadAdManager.setBool(CuteConf.HOME,true)
         EventBus.getDefault().unregister(this)
         exit(0)
     }

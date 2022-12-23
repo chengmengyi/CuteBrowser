@@ -123,7 +123,7 @@ object LoadAd {
                     .withAdListener(object : AdListener(){
                         override fun onAdFailedToLoad(p0: LoadAdError) {
                             super.onAdFailedToLoad(p0)
-                            cuteLog("fail load,$t-->${p0.message}")
+                            cuteLog("fail load,$t-->${p0.message}--->${p0.code}")
                             result.invoke(null)
                         }
 
@@ -141,6 +141,7 @@ object LoadAd {
                     )
                     .build()
                     .loadAd(AdRequest.Builder().build())
+
             }
         }
     }
@@ -149,5 +150,17 @@ object LoadAd {
 
     fun deleteAdBean(t: String){
         resultAd.remove(t)
+    }
+
+    fun removeAll(){
+        resultAd.clear()
+        loading.clear()
+        loadAd(CuteConf.OPEN)
+        loadAd(CuteConf.BOOK_MARK)
+        loadAd(CuteConf.HISTORY)
+        loadAd(CuteConf.TAB)
+        loadAd(CuteConf.VPN_HOME)
+        loadAd(CuteConf.VPN_CONNECT)
+        loadAd(CuteConf.VPN_RESULT)
     }
 }

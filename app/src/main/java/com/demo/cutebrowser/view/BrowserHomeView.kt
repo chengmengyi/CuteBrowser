@@ -7,7 +7,12 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.widget.ImageViewCompat
+import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.demo.cutebrowser.R
@@ -17,6 +22,8 @@ import com.demo.cutebrowser.adapter.FuncAdapter
 import com.demo.cutebrowser.eventbus.EventBean
 import com.demo.cutebrowser.eventbus.EventCode
 import com.demo.cutebrowser.manager.BrowserManager
+import com.demo.cutebrowser.util.getVpnLogo
+import com.demo.cutebrowser.vpn.ConnectVpnManager
 
 class BrowserHomeView @JvmOverloads constructor(
     private val ctx: Context,
@@ -49,5 +56,5 @@ class BrowserHomeView @JvmOverloads constructor(
         rootView.buildDrawingCache()
         return rootView.drawingCache
     }
-
 }
+

@@ -6,5 +6,6 @@ class EventCode {
         const val SEARCH_CONTENT=1
         const val ADD_TAB=2
         const val SHOW_RECORD_URL=3
+        const val TO_VPN_AC=4
     }
 }

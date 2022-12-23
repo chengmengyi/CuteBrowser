@@ -3,20 +3,39 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/bg_191919_16_16_0_0.xml" value="0.29384615384615387" />
         <entry key="app/src/main/res/drawable/bg_1f9f55_20dp.xml" value="0.29384615384615387" />
+        <entry key="app/src/main/res/drawable/bg_1f9f55_8dp.xml" value="0.29384615384615387" />
+        <entry key="app/src/main/res/drawable/bg_1fffffff_10dp.xml" value="0.29384615384615387" />
         <entry key="app/src/main/res/drawable/bg_242424_124dp.xml" value="0.29384615384615387" />
+        <entry key="app/src/main/res/drawable/bg_242424_5dp.xml" value="0.29384615384615387" />
         <entry key="app/src/main/res/drawable/bg_2f2f2f_10dp.xml" value="0.29384615384615387" />
+        <entry key="app/src/main/res/drawable/bg_434343_20dp.xml" value="0.29384615384615387" />
+        <entry key="app/src/main/res/drawable/bg_ad_tag.xml" value="0.29384615384615387" />
+        <entry key="app/src/main/res/drawable/bg_f8f8f8_11dp.xml" value="0.29384615384615387" />
         <entry key="app/src/main/res/drawable/bg_ffffff_6_6_0_0dp.xml" value="0.29384615384615387" />
+        <entry key="app/src/main/res/drawable/bg_install.xml" value="0.29384615384615387" />
         <entry key="app/src/main/res/drawable/bg_more_dialog.xml" value="0.29384615384615387" />
+        <entry key="app/src/main/res/drawable/bg_result.xml" value="0.29384615384615387" />
         <entry key="app/src/main/res/drawable/bg_search.xml" value="0.29384615384615387" />
+        <entry key="app/src/main/res/drawable/bg_vpn_info.xml" value="0.29384615384615387" />
+        <entry key="app/src/main/res/drawable/bg_vpn_item.xml" value="0.29384615384615387" />
+        <entry key="app/src/main/res/drawable/bg_vpn_time_color.xml" value="0.29384615384615387" />
+        <entry key="app/src/main/res/drawable/connect_btn_selector.xml" value="0.29384615384615387" />
+        <entry key="app/src/main/res/drawable/vpn_item_text_color.xml" value="0.29384615384615387" />
         <entry key="app/src/main/res/drawable/web_progress.xml" value="0.29384615384615387" />
         <entry key="app/src/main/res/layout/activity_bookmark.xml" value="0.20969202898550723" />
-        <entry key="app/src/main/res/layout/activity_browser.xml" value="0.22509057971014493" />
+        <entry key="app/src/main/res/layout/activity_browser.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_history.xml" value="0.20969202898550723" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22871376811594202" />
+        <entry key="app/src/main/res/layout/activity_result.xml" value="0.21105072463768115" />
         <entry key="app/src/main/res/layout/activity_tab_list.xml" value="0.22509057971014493" />
+        <entry key="app/src/main/res/layout/activity_vpn_home.xml" value="0.21105072463768115" />
+        <entry key="app/src/main/res/layout/activity_vpn_list.xml" value="0.21105072463768115" />
+        <entry key="app/src/main/res/layout/dialog_ir.xml" value="0.14924863387978143" />
         <entry key="app/src/main/res/layout/dialog_more_func.xml" value="0.20969202898550723" />
         <entry key="app/src/main/res/layout/dialog_search.xml" value="0.22509057971014493" />
+        <entry key="app/src/main/res/layout/dialog_vpn.xml" value="0.165" />
         <entry key="app/src/main/res/layout/item_bookmark.xml" value="0.20969202898550723" />
         <entry key="app/src/main/res/layout/item_bottom.xml" value="0.22509057971014493" />
         <entry key="app/src/main/res/layout/item_func.xml" value="0.22509057971014493" />
@@ -24,9 +43,14 @@
         <entry key="app/src/main/res/layout/item_history_title.xml" value="0.20969202898550723" />
         <entry key="app/src/main/res/layout/item_more_func.xml" value="0.20969202898550723" />
         <entry key="app/src/main/res/layout/item_tab.xml" value="0.22509057971014493" />
+        <entry key="app/src/main/res/layout/item_vpn_list.xml" value="0.21105072463768115" />
         <entry key="app/src/main/res/layout/layout_browser_home.xml" value="0.22509057971014493" />
         <entry key="app/src/main/res/layout/layout_browser_web.xml" value="0.25" />
         <entry key="app/src/main/res/layout/layout_history_native_ad.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/layout_home_bottom.xml" value="0.1711065573770492" />
+        <entry key="app/src/main/res/layout/layout_home_vpn_ad.xml" value="0.1711065573770492" />
+        <entry key="app/src/main/res/layout/layout_vpn_home_ad.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/layout_vpn_result_ad.xml" value="0.20697463768115942" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.29384615384615387" />
       </map>
     </option>

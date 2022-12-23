@@ -24,12 +24,19 @@
             </intent-filter>
         </activity>
         <activity android:name=".ac.browser.BrowserActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
         <activity android:name=".ac.browser.TabListActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".ac.browser.BookmarkActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".ac.browser.HistoryActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ac.vpn.VpnHomeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ac.vpn.ResultActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ac.vpn.VpnListActivity"
             android:screenOrientation="portrait"/>
 
         <meta-data
