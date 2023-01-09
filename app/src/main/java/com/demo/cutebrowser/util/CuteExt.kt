@@ -6,6 +6,9 @@ import android.widget.Toast
 import com.demo.cutebrowser.R
 
 fun getVpnLogo(name:String)=when(name){
+    "Austria"->R.drawable.aodili
+    "United States"->R.drawable.unitedstates
+    "United Kingdom"->R.drawable.uk
     else-> R.drawable.fast
 }
 
