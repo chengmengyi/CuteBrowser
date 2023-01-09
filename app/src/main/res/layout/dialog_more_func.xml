@@ -12,6 +12,8 @@
         android:id="@+id/rv_more_func"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_more_dialog"
-        android:layout_marginBottom="66dp"/>
+        android:background="@drawable/bg_more_dialog" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="66dp" />
 </androidx.appcompat.widget.LinearLayoutCompat>
