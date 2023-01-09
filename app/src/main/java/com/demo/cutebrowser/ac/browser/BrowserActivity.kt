@@ -19,13 +19,6 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import java.lang.System.exit
 
-import com.gyf.immersionbar.ImmersionBar
-import android.view.ViewGroup
-
-import android.app.Activity
-import android.view.View.NO_ID
-
-import androidx.annotation.NonNull
 import com.demo.cutebrowser.ac.vpn.VpnHomeActivity
 import com.demo.cutebrowser.admob.ShowNativeAd
 import com.demo.cutebrowser.conf.CuteConf
@@ -239,18 +232,16 @@ class BrowserActivity:BaseActivity(), IBrowserCallback {
                     PointManager.setUser("a")
                     return@withContext
                 }
-                if(CuteFirebase.csb_test.isEmpty()){
-                    val csb_test = MMKV.defaultMMKV().decodeString("csb_test") ?: ""
-                    if (csb_test.isEmpty()){
-                        val nextInt = Random().nextInt(100)
-                        CuteFirebase.csb_test=if (nextInt>20) "B" else "A"
-                        MMKV.defaultMMKV().encode("csb_test",csb_test)
+                if(CuteFirebase.planType.isEmpty()){
+                    val nextInt = Random().nextInt(100)
+                    CuteFirebase.planType = if (CuteFirebase.csb_test.isEmpty()){
+                        if (80>=nextInt) "B" else "A"
                     }else{
-                        CuteFirebase.csb_test=csb_test
+                        if (str2Int(CuteFirebase.csb_test)>=nextInt) "B" else "A"
                     }
                 }
-                PointManager.setUser(CuteFirebase.csb_test.toLowerCase())
-                if(CuteFirebase.csb_test=="B"&&ConnectVpnManager.disconnected()){
+                PointManager.setUser(CuteFirebase.planType.toLowerCase())
+                if(CuteFirebase.planType=="B"&&ConnectVpnManager.disconnected()){
                     doPlanB(true)
                 }else{
                     doPlanA()

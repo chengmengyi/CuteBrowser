@@ -10,7 +10,7 @@ object PointManager {
 
     fun setUser(plan:String){
         cuteLog("point===${plan}")
-//        remoteConfig.setUserProperty("cute_user",CuteFirebase.csb_test.toLowerCase())
+//        remoteConfig.setUserProperty("cute_user",plan)
     }
 
     fun point(name:String){

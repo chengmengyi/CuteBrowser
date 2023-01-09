@@ -147,7 +147,7 @@ class VpnHomeActivity:BaseActivity(), IConnectCallback {
         if (connectDisSuccess()){
             if (connect){
                 PointManager.point("cute_vpnsucc")
-                if(autoConnect&&CuteFirebase.csb_test=="B"){
+                if(autoConnect&&CuteFirebase.planType=="B"){
                     LoadAd.removeAll()
                 }
                 updateConnectedUI()

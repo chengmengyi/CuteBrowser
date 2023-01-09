@@ -29,6 +29,16 @@ fun Context.showToast(string: String){
     Toast.makeText(this,string,Toast.LENGTH_SHORT).show()
 }
 
+
+fun str2Int(string: String):Int{
+    try {
+        return string.toInt()
+    }catch (e:Exception){
+
+    }
+    return 0
+}
+
 fun isBuyUser(referrer:String)=referrer.contains("fb4a")||
         referrer.contains("gclid")||
         referrer.contains("not%20set")||

@@ -18,6 +18,7 @@ object CuteFirebase {
     var csb_reffer="1"
     var csb_shpop="2"
     var csb_test=""
+    var planType=""
     var isIR=false
     val cityList= arrayListOf<String>()
     val vpnList= arrayListOf<VpnBean>()
